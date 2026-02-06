@@ -3,7 +3,11 @@ function calculate(){
   let sum = 0;
 
   prices.forEach(price=>{
-    sum += Number(price.innerText);
+    // Extract numbers from cell
+    const value = price.innerText.match(/\d+/g);
+    if(value){
+      sum += Number(value[value.length-1]);
+    }
   });
 
   const table = document.querySelector("table");
