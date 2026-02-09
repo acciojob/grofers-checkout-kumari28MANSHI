@@ -1,24 +1,22 @@
-function calculate(){
+function calculate() {
   const prices = document.querySelectorAll(".prices");
   let sum = 0;
 
   prices.forEach(price => {
-    // Remove everything except digits and spaces
-    const cleaned = price.innerText.replace(/[^\d ]/g, "").trim();
-
-    // Split by space and take last value
-    const parts = cleaned.split(" ");
-    const latest = parts[parts.length - 1];
-
-    sum += Number(latest);
+    // Extract last numeric value from cell
+    const numbers = price.innerText.match(/\d+/g);
+    if (numbers) {
+      sum += Number(numbers[numbers.length - 1]);
+    }
   });
 
   const table = document.querySelector("table");
 
-  // Remove old total
+  // Remove old total row if it exists
   const old = document.getElementById("ans");
-  if(old) old.remove();
+  if (old) old.remove();
 
+  // Create new row
   const row = document.createElement("tr");
   const cell = document.createElement("td");
 
