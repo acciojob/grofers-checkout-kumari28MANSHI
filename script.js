@@ -3,23 +3,23 @@ function calculate() {
   let sum = 0;
 
   prices.forEach(price => {
-    // Get only digits from the cell
-    const numbers = price.innerText.match(/\d+/g);
+    const text = price.innerText.trim();
 
-    if (numbers) {
-      // Take the LAST number (latest typed value)
-      const latest = numbers[numbers.length - 1];
-      sum += parseInt(latest);
+    // Extract number from the END of the string
+    const match = text.match(/(\d+)$/);
+
+    if (match) {
+      sum += Number(match[1]);
     }
   });
 
   const table = document.querySelector("table");
 
-  // Remove old total if exists
+  // Remove old total row if exists
   const old = document.getElementById("ans");
   if (old) old.parentElement.remove();
 
-  // Create total row
+  // Create new total row
   const row = document.createElement("tr");
   const cell = document.createElement("td");
 
